@@ -55,8 +55,14 @@ module.exports = async (req, res) => {
 
     // Kirim notifikasi
     if (tokens.length > 0) {
-      await admin.messaging().sendToDevice(tokens, payload);
-      console.log('Notifikasi berhasil dikirim ke', tokens.length, 'perangkat');
+      // Menggunakan sendEachForMulticast untuk mengirim ke banyak token
+      const response = await admin.messaging().sendEachForMulticast({
+          tokens: tokens,
+          notification: payload.notification,
+          data: payload.data
+      });
+      console.log('Notifikasi berhasil dikirim. Berhasil:', response.successCount, ', Gagal:', response.failureCount);
+      console.log(response);
     } else {
       console.log('Tidak ada pengguna Tim Teknis yang terdaftar.');
     }

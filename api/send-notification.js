@@ -40,11 +40,11 @@ module.exports = async (req, res) => {
           notificationType: 'new_data_input'
         }
       };
-    } else if (type === 'new_order') {
+    } else if (type === 'new_izin_input') {
       payload = {
         notification: {
-          title: 'Pesanan Baru Diterima!',
-          body: `Ada pesanan baru dari pengguna dengan ID: ${userId}.`,
+          title: 'Permohonan Izin Baru Terinput!',
+          body: `Pengguna sedang menunggu tinjauan data. Silahkan ambil aksi`,
         },
         data: {
           userId: userId,
